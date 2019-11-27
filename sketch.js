@@ -36,6 +36,14 @@ function draw() {
   imageMode(CENTER);
   image(myImage, windowWidth/2, windowHeight/2, myImage.width/2, myImage.height/2);
 
+  var myText = 'press right arrow to start, then press left arrow to restart';
+  drawingContext.font = "italic 30px Open Sans";
+  fill(255);
+noStroke();
+  drawingContext.textAlign = "top";
+  text(myText, 20, 50);
+
+push();
   magnitude = radius/8;
 	angle = baseAngle;
 
@@ -65,6 +73,9 @@ translate(windowWidth/2, windowHeight/2);
 		angle += TWO_PI/number;
 	}
 	endShape();
+  pop();
+
+
 }
 
 function keyPressed() {
@@ -73,8 +84,11 @@ function keyPressed() {
     fft = new p5.FFT();
 			amplitude.setInput(mySong);
   } else if(keyCode == LEFT_ARROW) {
+    redraw();
     mySong.playMode('restart');
     mySong.play();
+
+
   }
 }
 
